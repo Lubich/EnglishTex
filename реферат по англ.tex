@@ -97,6 +97,47 @@ The amount of different sets of values in test $T$ is called the length of the t
 
 Shannon functions of the length of a single checking test $D^{detect}_{B,U_1}(n)$, of a complete diagnostic test $D^{diagn}_{B,U}(n)$, of a single diagnostic test $D^{diagn}_{B,U_1}(n)$ are defined similarly.
 
+\section{Overview of papers about synthesis of circuits that allow single checking and diagnostic tests.}
+In this section we give an overview of the known estimates of Shannon functions of the lengths of single tests for malfunctions at the element outputs.
+
+In the paper of S. Reddy it was shown that the value of Shannon function of the length of the single checking test for constant malfunctions at element outputs in the Zhegalkin basis $\{x\&y, x \oplus y, 1\}$ is not greater than $n+3$.
+
+Following results were obtained by N.P. Redkin:
+\begin{enumerate}
+	\item Shannon function of the length of the single diagnostic test for constant malfunctions of the same type at element outputs in the standard basis $B_0$ is not greater than $2n+1$.
+	\item It is possible to synthesize non-redundant circuits that allow the single diagnostic test for constant malfunctions of the same type at element outputs in an infinite basis that consists of conjunctors, disjunctors and an invertor, that is not longer than $2\log_3\lceil n+1 \rceil +1$.
+	\item Shannon function of the length of the single checking test for inverse malfunctions at element outputs in an arbitrary basis is not greater than $3$.
+\end{enumerate}
+
+S. Kovatsenko showed that Shannon function of the length of the single checking test for inverse malfunctions at element outputs in the Zhegalkin basis equals $1$. In that paper it was also shown that  Shannon function of the length of the single diagnostic test for inverse malfunctions at element outputs in the Zhegalkin basis is not greater than $n+1$.
+
+U. Borodina proved that Shannon function of the length of the single checking test for constant malfunctions of the type 1 at element outputs in the Zhegalkin basis equals $1$.
+
+S.Kolyada showed that Shannon function of the length of the single checking test for constant malfunctions at element outputs in an arbitrary basis is not greater than $n+3$.
+
+D.Romanov proved that Shannon function of the length of the single checking test for constant and inverse malfunctions at element outputs in an arbitrary complete basis is not greater than $4$ and is not less than $2$.
+
+Let us consider in detail the latest work. It is worth noting that whenever a constant malfunction can be detected at an element output, the inverse malfunction can be detected at the same element output on the same set of variable values. Therefore upper bounds of lengths of checking tests for single inverse and constant malfunctions at element outputs can be obtained automatically based on similar results lengths of checking tests for a single constant malfunctions at element outputs. 
+
+The lower bound is caused by the fact that every non-constant function should be distinguished from both constants.
+
+The upper bound is initially proven for basis $B'=\{x\&y,x\oplus y, x\sim y\}$ and then it's extended to arbitrary basis.
+
+An easily-tested circuit $S$ is synthesized for arbitrary function $f$ in the basis $B'$. $S$ consists of four blocks: $S_1,S_2,S_3,S_4$.
+\begin{enumerate}
+	\item
+	Block $S_1$ implements non-linear summands of Zhegalkin polynomial of the function $f$ i.e. it consists of a number of sequences of conjunctors.
+	\item
+	Block $S_2$ is a copy of $S_1$ with the last element removed from each sequence.
+	\item
+	In the block $S_3$ an element with three inputs is added for each pair of corresponding elements from $S_1,S_2$. That element implements the function $\psi = \bar{x} (y \vee z) \vee x(y \sim z) $ if the element of $S_2$ is an output element of the sequence and the function $\psi '=\psi \oplus x\bar{y}z$ otherwise.
+	The first and second inputs receive the outputs of $S_1,S_2$ and the third one receives the variable $x_1$.
+	\item
+	Block $S_4$ consists of a sequence of $\oplus$ elements. The left input of the first element of the sequence $C$ receives the output of the sequence $C_1$ of the block $S_1$. Left inputs of other sequences receive the output of the previous element. Right inputs of the sequence $C$ initially receive outputs of sequences $C_2,\ldots,C_1$ of the block $S_1$ then receive outputs of all sequences of the block $S_3$ and finally receive variables that are linear summands in the Zhegalkin polynomial of the function $f$.
+\end{enumerate}  
+
+The set $\hat{T}_n=\{(\tilde{0}^n),(\tilde{1}^n),(1,\tilde{0}^{n-1}),(\tilde{1}^s,\tilde{0}^{n-s})\}$ (where s is the number of multipliers in the shortest non-linear conjunction of the Zhegalkin polynomial of the function $f$) is a single checking test for that circuit.
+
 \begin{thebibliography}{9}
 \bibitem{krug}
   {\it Кружков~С.~Н., Горицкий~А.~Ю., Чечкин~Г.~А.}
