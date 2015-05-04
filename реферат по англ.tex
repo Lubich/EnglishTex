@@ -1,0 +1,126 @@
+\documentclass[11pt]{article}
+\usepackage{setspace}
+\usepackage{graphics,graphicx,epsfig}%DVI-mode.
+\usepackage[cp1251]{inputenc}       % Code as Russian Windows.
+\usepackage[english,russian]{babel} % Download Russian fonts.
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amscd} % Use AMS symbols.
+\usepackage{multicol}
+\usepackage{vmargin}
+\usepackage[usenames]{color}
+\onehalfspacing
+\textheight=26cm % высота текста
+\textwidth=18cm % ширина текста
+\oddsidemargin=-1cm
+\evensidemargin=-1cm
+\setmarginsrb{2cm}{2.3cm}{2cm}{1cm}{0pt}{0mm}{0pt}{13mm}
+\parindent=24pt % абзацный отступ
+\parskip=2pt % интервал между абзацами
+\tolerance=2000 % терпимость к "жидким" строкам
+%\flushbottom % выравнивание высоты страниц
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcounter{cPlot}
+\setcounter{cPlot}{1}
+\newcommand*{\No}{\textnumero}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+\ \vspace{-3cm}
+
+\includegraphics[width=0.5\textwidth]{msu.eps}\\
+{\scshape Moscow State University}\\
+
+\vfill
+
+
+\vspace{1cm}
+\begin{doublespace}
+{\Huge\bfseries Synthesis of Easily-Tested Circuits in the Case of Malfunctions at the Element Outputs}
+\end{doublespace}
+\end{center}
+
+\vspace{1cm}
+
+\begin{flushright}
+  \large
+ 
+  I.~Lyubich
+
+\end{flushright}
+
+\vfill
+
+\begin{center}
+Moscow, 2015
+\end{center}
+
+\pagebreak
+
+\tableofcontents
+\pagebreak
+
+\section{Introduction}
+Let $f(\tilde{x}^n)$ be a boolean function that is formally dependent on a set of variables $x_1,x_2,\ldots,x_n$.
+\newtheorem{Def}{Definition}
+\begin{Def}
+	Logical circuit in the basis $B$ is called the labeled directed graph without cycles $S = (V, E)$, in which:
+	\begin{enumerate}
+	\item
+	 vertices, that are not included in the ribs, are called input circuit, and each of them is marked with some variable (different vertices correspond to different variables);
+	\item
+	 other vertices are labeled with functions $f(x) \in B$ so that the number of inputs of these functions are equal to the number of inputs of their corresponding vertices.
+	\end{enumerate}
+\end{Def} 
+Let $S$ be a logical circuit in the basis $B$ that implements a boolean function $f$. Let $S$ be affected by a source of malfunctions $U$ that can transform $S$ into a different logical circuit. Among different types of sources of malfunctions inverse and constant types are often considered, i.e. the output of any functional element of the circuit can be substituted by its inversion (in case of inverse malfunctions) or by a boolean constant (in case of constant malfunctions). For simplicity we assume that a source of malfunctions $U$ can't cause constant malfunctions of type "constant $\sigma$" for elements with functions "constant $\sigma$" or constant malfunctions that are equal to the function implemented by $S$ (if that function is constant) for output element of $S$.
+
+We denote by $W(S)$ the set of all pairwise unequal functions that can all be implemented by circuit $S$ after its elements are affected by malfunctions caused by a source of malfunctions $U$. Circuit $S$ is non-redundant if and only if $\forall g(\tilde{x}^n) \in W(S): f(\tilde{x}^n) \neq g(\tilde{x}^n)$.
+
+\begin{Def}
+	A set $T$ of sets of values of variables $x_1, x_2, \ldots, x_n$ is called a checking test for circuit $S$ if and only if $\forall g(\tilde{x}^n) \in W(S): g(\tilde{x}^n) \neq f(\tilde{x}^n)\; \exists \tilde{\alpha} \in T: g(\tilde{\alpha}) \neq f(\tilde{\alpha})$.
+\end{Def}
+
+\begin{Def}
+	A set $T$ of sets of values of variables $x_1, x_2, \ldots, x_n$ is called a diagnostic test for circuit $S$ if and only if $\forall g_1(\tilde{x}^n) \in W(S), g_2(\tilde{x}^n) \in W(S): g_1(\tilde{x}^n) \neq g_2(\tilde{x}^n)\; \exists \tilde{\alpha} \in T: g_1(\tilde{\alpha}) \neq g_2(\tilde{\alpha})$.
+\end{Def}
+
+\begin{Def}
+	A test for a source that affects no more than one functional element of the circuit is called a single test.
+\end{Def}
+
+\begin{Def}
+	A test for a source that affects any number of functional elements of the circuit is called a complete test.
+\end{Def}
+
+The amount of different sets of values in test $T$ is called the length of the test and is denoted by $l(T)$ or $|T|$. A test of minimal length is called a minimal test. Let us consider a circuit $S$ in the basis $B$ that is affected by source of malfunctions $U$. We denote by $D^{detect}_U(S)$ the length of the minimal complete test for $S$, by $D^{detect}_{B,U}(f(\tilde{\alpha}))$ - the minimal value of $D^{detect}_U(S)$ among all non-redundant circuits $S$ that implement function $f(\tilde{\alpha})$ in the basis $B$. We denote by $D^{detect}_{B,U}(n)$ the Shannon function of the length of a complete checking test, i.e. the function $$D^{detect}_{B,U}(n) = \underset{f(\tilde{x}^n)\in P_2^n}{\max} D^{detect}_{B,U}(f(\tilde{x}^n)).$$
+
+Shannon functions of the length of a single checking test $D^{detect}_{B,U_1}(n)$, of a complete diagnostic test $D^{diagn}_{B,U}(n)$, of a single diagnostic test $D^{diagn}_{B,U_1}(n)$ are defined similarly.
+
+\begin{thebibliography}{9}
+\bibitem{krug}
+  {\it Кружков~С.~Н., Горицкий~А.~Ю., Чечкин~Г.~А.}
+  Уравнения с частными производными первого порядка.
+  М.: 1999.
+\bibitem{petrosyanNew}
+  {\it Кружков~С.~Н.,Петросян~Н.~С.}
+  Асимптотическое поведение решений задачи Коши для нелинейных уравнений первого порядка.
+  /\!/ Успехи математических наук $1987$ том $42$ \No $5$ С. 3--40.
+\bibitem{petrosyan}
+  {\it Петросян~Н.~С.}
+  Об асимптотике решения задачи Коши для квазилинейного уравнения первого порядка с невыпуклой функцией состояния.
+  /\!/ Московское математическое общество $1982$ С. 504--509.
+\bibitem{Rogov1}
+  {\it Рогов~Б.~В.}
+  Монотонная бикомпактная схема для квазилинейных уравнений гиперболического типа.
+  /\!/ Доклады академии наук $2012$ том $446$ \No $5$ С. 504--509.
+\bibitem{kalitkin}
+  {\it Калиткин~Н.~Н.}
+  Численные методы.
+  М.: Наука, 1978. 512с.
+\bibitem{holod}
+  {\it Холодов~А.~С.}
+  Численные методы решения уравнений и систем гиперболического типа.
+  М.: Институт автоматизации проектирования РАН, Московский физики-технический институт
+\end{thebibliography}
+\end{document} 
