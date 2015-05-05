@@ -2,7 +2,7 @@
 \usepackage{setspace}
 \usepackage{graphics,graphicx,epsfig}%DVI-mode.
 \usepackage[cp1251]{inputenc}       % Code as Russian Windows.
-\usepackage[english,russian]{babel} % Download Russian fonts.
+\usepackage[russian,english]{babel} % Download Russian fonts.
 \usepackage{amsmath,amsfonts,amssymb,amsthm,amscd} % Use AMS symbols.
 \usepackage{multicol}
 \usepackage{vmargin}
@@ -20,8 +20,9 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \newcounter{cPlot}
 \setcounter{cPlot}{1}
+\usepackage{textcomp}
 \newcommand*{\No}{\textnumero}
-
+\selectlanguage{english}
 \begin{document}
 
 \thispagestyle{empty}
@@ -64,6 +65,7 @@ Moscow, 2015
 \section{Introduction}
 Let $f(\tilde{x}^n)$ be a boolean function that is formally dependent on a set of variables $x_1,x_2,\ldots,x_n$.
 \newtheorem{Def}{Definition}
+\newtheorem{Th}{Theorem}
 \begin{Def}
 	Logical circuit in the basis $B$ is called the labeled directed graph without cycles $S = (V, E)$, in which:
 	\begin{enumerate}
@@ -78,7 +80,7 @@ Let $S$ be a logical circuit in the basis $B$ that implements a boolean function
 We denote by $W(S)$ the set of all pairwise unequal functions that can all be implemented by circuit $S$ after its elements are affected by malfunctions caused by a source of malfunctions $U$. Circuit $S$ is non-redundant if and only if $\forall g(\tilde{x}^n) \in W(S): f(\tilde{x}^n) \neq g(\tilde{x}^n)$.
 
 \begin{Def}
-	A set $T$ of sets of values of variables $x_1, x_2, \ldots, x_n$ is called a checking test for circuit $S$ if and only if $\forall g(\tilde{x}^n) \in W(S): g(\tilde{x}^n) \neq f(\tilde{x}^n)\; \exists \tilde{\alpha} \in T: g(\tilde{\alpha}) \neq f(\tilde{\alpha})$.
+	A set $T$ of sets of values of variables $x_1, x_2, \ldots, x_n$ is called a checking (detection) test for circuit $S$ if and only if $\forall g(\tilde{x}^n) \in W(S): g(\tilde{x}^n) \neq f(\tilde{x}^n)\; \exists \tilde{\alpha} \in T: g(\tilde{\alpha}) \neq f(\tilde{\alpha})$.
 \end{Def}
 
 \begin{Def}
@@ -104,18 +106,18 @@ In the paper of S. Reddy it was shown that the value of Shannon function of the 
 
 Following results were obtained by N.P. Redkin:
 \begin{enumerate}
-	\item Shannon function of the length of the single diagnostic test for constant malfunctions of the same type at element outputs in the standard basis $B_0$ is not greater than $2n+1$.
-	\item It is possible to synthesize non-redundant circuits that allow the single diagnostic test for constant malfunctions of the same type at element outputs in an infinite basis that consists of conjunctors, disjunctors and an invertor, that is not longer than $2\log_3\lceil n+1 \rceil +1$.
+	\item Shannon function of the length of the single diagnostic test for single-type constant malfunctions at element outputs in the standard basis $B_0$ is not greater than $2n+1$.
+	\item It is possible to synthesize non-redundant circuits that allow the single diagnostic test for single-type constant malfunctions at element outputs in an infinite basis that consists of conjunctors, disjunctors and an invertor, that is not longer than $2\log_3\lceil n+1 \rceil +1$.
 	\item Shannon function of the length of the single checking test for inverse malfunctions at element outputs in an arbitrary basis is not greater than $3$.
 \end{enumerate}
 
 S. Kovatsenko showed that Shannon function of the length of the single checking test for inverse malfunctions at element outputs in the Zhegalkin basis equals $1$. In that paper it was also shown that  Shannon function of the length of the single diagnostic test for inverse malfunctions at element outputs in the Zhegalkin basis is not greater than $n+1$.
 
-U. Borodina proved that Shannon function of the length of the single checking test for constant malfunctions of the type 1 at element outputs in the Zhegalkin basis equals $1$.
+Yu. Borodina proved that Shannon function of the length of the single checking test for constant malfunctions of the type 1 at element outputs in the Zhegalkin basis equals $1$.
 
 S.Kolyada showed that Shannon function of the length of the single checking test for constant malfunctions at element outputs in an arbitrary basis is not greater than $n+3$.
 
-D.Romanov proved that Shannon function of the length of the single checking test for constant and inverse malfunctions at element outputs in an arbitrary complete basis is not greater than $4$ and is not less than $2$.
+D.Romanov in \cite{romanov} proved that Shannon function of the length of the single checking test for constant and inverse malfunctions at element outputs in an arbitrary complete basis is not greater than $4$ and is not less than $2$.
 
 Let us consider in detail the latest work. It is worth noting that whenever a constant malfunction can be detected at an element output, the inverse malfunction can be detected at the same element output on the same set of variable values. Therefore upper bounds of lengths of checking tests for single inverse and constant malfunctions at element outputs can be obtained automatically based on similar results lengths of checking tests for a single constant malfunctions at element outputs. 
 
@@ -137,31 +139,62 @@ An easily-tested circuit $S$ is synthesized for arbitrary function $f$ in the ba
 \end{enumerate}  
 
 The set $\hat{T}_n=\{(\tilde{0}^n),(\tilde{1}^n),(1,\tilde{0}^{n-1}),(\tilde{1}^s,\tilde{0}^{n-s})\}$ (where s is the number of multipliers in the shortest non-linear conjunction of the Zhegalkin polynomial of the function $f$) is a single checking test for that circuit.
+\section{Overview of papers about synthesis of circuits that allow complete checking and diagnostic tests.}
 
-\begin{thebibliography}{9}
-\bibitem{krug}
-  {\it Кружков~С.~Н., Горицкий~А.~Ю., Чечкин~Г.~А.}
-  Уравнения с частными производными первого порядка.
-  М.: 1999.
-\bibitem{petrosyanNew}
-  {\it Кружков~С.~Н.,Петросян~Н.~С.}
-  Асимптотическое поведение решений задачи Коши для нелинейных уравнений первого порядка.
-  /\!/ Успехи математических наук $1987$ том $42$ \No $5$ С. 3--40.
-\bibitem{petrosyan}
-  {\it Петросян~Н.~С.}
-  Об асимптотике решения задачи Коши для квазилинейного уравнения первого порядка с невыпуклой функцией состояния.
-  /\!/ Московское математическое общество $1982$ С. 504--509.
-\bibitem{Rogov1}
-  {\it Рогов~Б.~В.}
-  Монотонная бикомпактная схема для квазилинейных уравнений гиперболического типа.
-  /\!/ Доклады академии наук $2012$ том $446$ \No $5$ С. 504--509.
-\bibitem{kalitkin}
-  {\it Калиткин~Н.~Н.}
-  Численные методы.
-  М.: Наука, 1978. 512с.
-\bibitem{holod}
-  {\it Холодов~А.~С.}
-  Численные методы решения уравнений и систем гиперболического типа.
-  М.: Институт автоматизации проектирования РАН, Московский физики-технический институт
+In this section we give an overview of the known estimates of Shannon functions of the lengths of complete tests for malfunctions at the element outputs.
+
+N. Redkin showed that Shannon function of the length of the complete checking test for single-type constant malfunctions at element outputs in the standard basis is not greater than $n$.
+
+Yu. Borodina in \cite{borodina} proved that Shannon function of the length of the complete checking test for single-type constant malfunctions at element outputs in the standard basis equals $2$. In \cite{borodina2} she shows that Shannon function of the length of the complete checking test for constant malfunctions of type 0 at element outputs in the Zhegalkin basis equals $1$.
+
+D. Romanov in \cite{romanov2} proved  Shannon function of the length of the complete checking test for constant malfunctions at element outputs in the one special basis $\hat{B}$ is not greater than $4$.
+
+The main idea of proof of the last result similar to the proof of the theorem from the previous section. The final circuit consists of five blocks:
+\begin{enumerate}
+	\item
+	Blocks $(S_1,S_2)$ implement the Zhegalkin polynomial of the function so that both zero and one values appear on the output at the four sets of variables $\hat{T}$ on the input. In  $\hat{T}$ there is no more than one set of values of variables $(x_1,x_2,x_n)$ for every set of values of variables $(x_1,x_2,x_n)$. The inputs of each other elements have variables for calculating values of "detector functions" that are transmitted by circuits of functional elements and are used as signals for the recognition of certain events.
+	\item
+	Four sets from the set $\hat{T}$ form six combinations with one pair in each. For every pair we synthesize the sequence of functional elements so that accessory to a given set $\hat{T}$ of input pair is detected at the output of this sequence. In the graph $K_4$ with vertices from the set $\hat{T}$ we take two different simple cycles with length $4$. The outputs of the six sequences, that correspond to the edges of one of these cycles are applied to the inputs of its "resultant" functional element, that  detects whether an input set belongs to the set $\hat{T}$. The block $S_3$ consists of these six sequences and two "resultant" functional elements.
+	\item
+	Block $S_4$ monitors correct operation of all the elements from $S_1,S_2,S_3$ on the set $\hat{T}$. For every element from sets $S_1,S_2,S_3$ There is checking element in block $S_4$. Elements from $S_4$ arranged in a sequence, that  transmits to the output the signal if any of blocks $S_1,S_2,S_3$ works wrong or that an error is not detected.
+	\item
+	The output elements of circuit receives variables $x_1,x_2,x_n$ and the outputs of blocks $S_2,S_3,S_4$. The logic of work of the output element of the circuit is as follows: if we receive information that the input set does not belong to the set $\hat{T}$, or that the input set belongs to the set $\hat{T}$ while the output element of block $S_2$ works correctly and block $S_4$ doesn't detect any errors, or that the input set belongs to the set $\hat{T}$ while the output element of block $S_2$ works incorrectly and block $S_4$ detects any errors, then the output of the circuit has the value outputted from the block $S_2$ or the inverse of this value otherwise. 
+\end{enumerate}  
+
+If we have malfunction on the output element we will detect it because the function $f$ has both values on the sets of variables from set $\hat{T}$. With proper choice of detector functions on four sets from $\hat{T}$ both zero and one values appear twice at the output of each element from the block $S_3$. Moreover, not less than three sets of values from the set $\hat{T}$ are proper recognized at arbitrary constant malfunctions. If there is a malfunction in block $S_4$ we will detect the error at the set of variables from the set $\hat{T}$ that proper recognized and which value of variable $x_2$ differ from the constant of malfunction of the last broken element from $S_4$. If there is malfunction in block $S_3$ we will detect the error because the value at the output of the broken element in case of absence of malfunction differ from the constant of malfunction on one of three set of variables from the set $\hat{T}$. 
+\section{Estimates of Easily-Tested Circuits in the Case of Malfunctions of special type}
+In this section we consider circuit $S$ that implements the Zhegalkin polynomial of the function $S$. We consider the source of malfunctions of the following form: two successive vertices (output of on vertice is the input of another) replaced by one. Inputs of the new one is the inputs of initial vertices (except the transition from one to another). This new vertice implements function $\varphi$. Our task is to find the length of minimal checking test for the circuit $S$ in case of different functions $\varphi$. It is worth noticing that function $\varphi$ has three inputs.
+
+Let the function $\varphi (x_1,x_2,x_3)= x_1 \oplus x_2 \oplus x_3 \oplus 1$. In this case the zero set of variables is the single checking test. Actually, inputs of the new vertice are zeros, so the output of the function $\varphi = 1$ On the output of the circuit we receives the inverse value of the function $f$.
+
+Moreover, these arguments are true for every function $\varphi$ that doesn't save zero. 
+\pagebreak
+
+\section{Conclusion}
+In this paper we described the last results in the area of testing the circuits of functional elements. We consider the ideas of proofs theorems that was described in \cite{romanov},\cite{romanov2} by Romanov D.:
+\begin{Th}
+	For every boolean function $f$ there is non-redundant circuit $S^f_B$ in arbitrary basis B admitting single fault checking tests of constant length no greater than 4 at the case of inverse and constant malfunctions.
+\end{Th}
+\begin{Th}
+	$$
+	\exists \hat{B}: n\in N \cup \{0\}  \forall, f(\tilde{x}^n): D_{\hat{B},U}^{detect}(f(\tilde{x}^n)) \leq 4,
+	$$ where the $\hat{B}$ consists of functional elements with the number of inputs from  one to seven. 
+\end{Th}
+
+Also, the problem of finding minimal length of checking test in the case of malfunctions of special type was given and it was proved that zero set is a test if function $\varphi$ doesn't save zero. 
+\pagebreak
+\begin{thebibliography}{3}
+\bibitem{romanov}
+  {\it Romanov ~D.~S.}
+  A method for synthesis of easily-testable circuits in some basis admitting single fault detection tests of constant length // Moscow University Mathematics Bulletin, Volume 67, \No 2, April 2012, pp. 69-73.
+\bibitem{borodina}
+  {\it Borodina ~Yu.~V.}
+  Synthesis of easily-tested circuits in the case of single-type constant malfunctions at the element outputs // Moscow University Computational Mathematics and Cybernetics, 2008, Vol. 32, \No. 1, pp. 42-46.
+\bibitem{borodina2}
+{\it Borodina ~Yu.~V., Borodin ~P.~A. }
+Yu. V. Borodina, P. A. Borodin, Synthesis of easily testable circuits over the Zhegalkin basis in the case of constant faults of type 0 at outputs of elements // Discrete Mathematics and Applications, Volume 20, Issue 4, pp. 441-449.
+\bibitem{romanov2}
+{\it Romanov ~D.~S.}
+Synthesis of circuits admitting complete checking tests of constant length in the case of constant malfunctions at the element outputs. // Discrete Mathematics, 2013 Vol. 24, \No 2. pp.104-120. 
 \end{thebibliography}
 \end{document} 
